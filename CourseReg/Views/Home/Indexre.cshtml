@@ -1,0 +1,42 @@
+﻿@model List<CourseReg.Models.StdLogin>
+@{
+    ViewBag.Title = "Indexre";
+}
+
+<h2>Content List</h2>
+<div class="col-md-offset-5 pull-right" style="margin-top:-40px">
+    <a href="@Url.Action("Register","Home")" class="btn btn-primary">Create New</a>
+</div>
+<div class="row">
+    
+    <div class="col-md-12">
+        <table class="table table-responsive table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Sr#</th>
+                    <th>Name</th>
+                    <th>Father Name</th>
+                    <th>User Name</th>
+                    <th>Address</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            @foreach (var lst in Model)
+            {
+        <tr>
+            <td>@lst.id</td>
+            <td>@lst.StdName</td>
+            <td>@lst.FatherName</td>
+            <td>@lst.UserName</td>
+            <td>@lst.Address</td>
+           
+            <td >
+                <a href="@Url.Action("Edit", new { id = lst.id })" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="Click Me To Edit">Edit</a>
+                <a href="@Url.Action("Delete", new { id = lst.id })" class="btn btn-danger" data-toggle="tooltip" data-placement="left" title="Click Me To Delte">Delete</a>
+            </td>
+        </tr>
+            }
+
+        </table>
+    </div>
+</div>

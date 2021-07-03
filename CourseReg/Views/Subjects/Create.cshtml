@@ -1,0 +1,37 @@
+﻿@model CourseReg.ViewModel.Subject_VM
+@{
+    ViewBag.Title = "Create";
+}
+<h2>Register Book</h2>
+<div class="col-md-offset-5 pull-right" style="margin-top:-40px">
+    <a href="@Url.Action("Index","Subjects")" class="btn btn-primary">List Content</a>
+</div>
+@using (Html.BeginForm("Save", "Subjects", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="row">
+      
+        <div class="col-md-3">
+            <label>Select Semester</label>
+            @Html.DropDownListFor(m => m.Books.Chemsterid, new SelectList(Model.ScmesterList, "id", "Name"), "Select Semester", htmlAttributes: new { @class = "form-control input-xs", })
+        </div>
+        <div class="col-md-3 ">
+            <label>Name</label>
+            @Html.TextBoxFor(m => m.Books.Name, new { @class = "form-control", @placeholder = "Name...", maxlength = "20", })
+        </div>
+        <div class="form-group" style="margin-top:20px">
+            <div class="col-md-offset-9 col-md-10">
+                @if (Model.Books.id == 0)
+                {
+                    <input type="submit" onclick="return confirm('Do you want to Save ..')" class="btn btn-primary col-md-3" value="Save" />
+                }
+                else
+                {
+                    <input type="submit" onclick="return confirm('Do you want to update ..')" class="btn btn-primary col-md-3" value="Update" />
+                }
+            </div>
+        </div>
+    </div>
+    @Html.HiddenFor(m => m.Books.id)
+}
+

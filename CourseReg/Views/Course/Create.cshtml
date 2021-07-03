@@ -1,0 +1,61 @@
+﻿@model CourseReg.ViewModel.Subject_VM
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Course Registration</h2>
+<div class="col-md-offset-5 pull-right" style="margin-top:-40px">
+    <a href="@Url.Action("Index","Course")" class="btn btn-primary">List Content</a>
+</div>
+@using (Html.BeginForm("Create", "Course", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="row">
+
+        <div class="col-md-3">
+            <label>Select Semester</label>
+            @Html.DropDownListFor(m => m.CourseRegistartion.Chemester, new SelectList(Model.ScmesterList, "id", "Name"), "Select Semester", htmlAttributes: new { @class = "form-control input-xs", })
+        </div>
+
+        <div class="form-group" style="margin-top:20px">
+            <div class="col-md-offset-3 col-md-10">
+
+                <input type="submit" class="btn btn-primary col-md-3" value="Search" />
+
+            </div>
+        </div>
+    </div>
+}
+@using (Html.BeginForm("Save", "Course", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table-responsive table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Sr#</th>
+                    <th>Book Name</th>
+                </tr>
+            </thead>
+            @foreach (var lst in Model.BookList)
+            {
+                <tr>
+                    <td><input type="checkbox" name="Bookid" value="@lst.id" /></td>
+                    <td>@lst.Name </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+    <div class="form-group" style="margin-top:20px">
+        <div class="col-md-offset-9 col-md-10">
+
+            <input type="submit" class="btn btn-primary col-md-3" value="Save" />
+
+        </div>
+    </div>
+</div>
+    @Html.HiddenFor(m => m.CourseRegistartion.Chemester)
+    @Html.HiddenFor(m => m.CourseRegistartion.id)
+}

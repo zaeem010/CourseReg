@@ -1,0 +1,36 @@
+﻿@model CourseReg.Models.StdLogin
+@{
+    ViewBag.Title = "Login";
+}
+
+<h2>Login</h2>
+<div class="col-md-offset-5 pull-right" style="margin-top:-40px">
+    <a href="@Url.Action("Register","Home")" class="btn btn-primary">Register New User</a>
+</div>
+<div class="row">
+    <div class="col-md-8">
+
+        @using (Html.BeginForm("Logins", "Home", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+        {
+            @Html.AntiForgeryToken()
+            <div class="col-md-6">
+                <label>User Name</label>
+                @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
+            </div>
+            <div class="col-md-6">
+                <label>User Name</label>
+                @Html.TextBoxFor(m => m.Pass, new { @class = "form-control", @type = "password" })
+            </div>
+            <br />
+            <br />
+          
+            <div class="form-group" style="margin-top:30px">
+                <div class="col-md-offset-10 col-md-10">
+
+                    <input type="submit" class="btn btn-primary col-md-3" value="Login" />
+
+                </div>
+            </div>
+        }
+    </div>
+</div>
